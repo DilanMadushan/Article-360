@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 
 
@@ -54,17 +55,13 @@ export default function Login() {
         </View>
 
 
-
-
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
 
-
-
         <Text style={styles.footerText}>
-          Don't have an account? <Text style={styles.signupText}>Sign Up</Text>
+          Don't have an account? <Pressable onPress={() => router.push("/SignUp")} ><Text style={styles.signupText}>Sign Up</Text></Pressable> 
         </Text>
       </View>
     </LinearGradient>

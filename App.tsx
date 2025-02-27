@@ -1,12 +1,12 @@
-import Article from "./pages/Article"
-import DashBoard from "./pages/Dashboard"
-import Login from "./pages/Login"
-import SignUp from "./pages/SignUp"
+import Article from "./app/Article"
+import DashBoard from "./app/DashBoard"
+import Login from "./app/Login"
+import SignUp from "./app/SignUp"
 
 const App = () => {
   return (
     <>
-  
+    <SignUp/>
     </>
     
   )

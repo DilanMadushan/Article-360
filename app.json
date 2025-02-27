@@ -2,6 +2,7 @@
   "expo": {
     "name": "Article-360",
     "slug": "Article-360",
+    "scheme": "ARTICLE-360",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,7 +23,11 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+       "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

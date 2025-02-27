@@ -8,7 +8,7 @@ const DashBoard = () => {
   
   return (
      <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
-          <StatusBar style="light" />
+          <StatusBar style="dark" />
           <Text style={styles.title}>DASHBOARD</Text>
           <ScrollView style={styles.scrollView}>
             

@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   articleBox: {
-    width: "85%",
+    width: "100%",
     backgroundColor: "#1E1D1D",
     padding: 20,
     borderRadius: 15,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   imagePicker: {
     backgroundColor: "#333",
     width: "100%",
-    height: 150,
+    height: 180,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: "100%",
-    height: 150,
+    height:250,
     textAlignVertical: "top",
     fontSize: 16,
     marginBottom: 15,
