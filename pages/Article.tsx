@@ -12,7 +12,6 @@ export default function Article() {
   const [image, setImage] = useState(null);
 
 
-  // Function to pick an image
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -37,7 +36,6 @@ export default function Article() {
         <Text style={styles.title}>Write Your Article</Text>
 
 
-        {/* Title Input */}
         <View style={styles.inputContainer}>
           <Ionicons name="document-text-outline" size={20} color="#888" />
           <TextInput
@@ -50,7 +48,6 @@ export default function Article() {
         </View>
 
 
-        {/* Image Picker */}
         <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
           {image ? (
             <Image source={{ uri: image }} style={styles.image} />
@@ -60,7 +57,6 @@ export default function Article() {
         </TouchableOpacity>
 
 
-        {/* Content Input */}
         <TextInput
           style={styles.contentInput}
           placeholder="Write your article here..."
@@ -71,7 +67,6 @@ export default function Article() {
         />
 
 
-        {/* Save Button */}
 
 
         <View style={{ width: "100%"}}>

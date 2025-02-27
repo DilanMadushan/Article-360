@@ -58,7 +58,6 @@ export default function SignUp() {
         </View>
 
 
-        {/* Confirm Password Input */}
         <View style={styles.inputContainer}>
           <Ionicons name="lock-closed-outline" size={20} color="#888" />
           <TextInput
@@ -72,13 +71,11 @@ export default function SignUp() {
         </View>
 
 
-        {/* Signup Button */}
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
 
 
-        {/* Login Redirect */}
         <Text style={styles.footerText}>
           Already have an account? <Text style={styles.loginText}>Login</Text>
         </Text>
