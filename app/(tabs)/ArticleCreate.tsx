@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import ArticleModle from "../../model/ArticlModel";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { saveArticleState, updateArticleState } from "../../slice/ArticleSlice";
+import { deleteArticleState, saveArticleState, updateArticleState } from "../../slice/ArticleSlice";
 
 
 const encodeImageFileAsURL = async (uri) => {
@@ -95,9 +95,28 @@ export default function ArticleCreate() {
       const base64Image = await encodeImageFileAsURL(image);
 
       dispatch(updateArticleState(new ArticleModle(title, base64Image, content)));
+      setTitle("");
+      setContent("");
+      setImage(null);
     }
     catch (error) {
       console.error("Error updating article:", error);
+    }
+  };
+
+  const deleteArticle = async () => {
+    try {
+      if(!title){
+        console.error("No title selected!");
+        return;
+      }
+      dispatch(deleteArticleState(title));
+      setTitle("");
+      setContent("");
+      setImage(null);
+
+    }catch (error) {
+      console.error("Error deleting article:", error);
     }
   };
 
@@ -142,7 +161,7 @@ export default function ArticleCreate() {
             <TouchableOpacity style={styles.button} onPress={updateArticle}>
               <Text style={styles.buttonText}>Update Article</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={addArticle}>
+            <TouchableOpacity style={styles.button} onPress={deleteArticle}>
               <Text style={styles.buttonText}>Delete Article</Text>
             </TouchableOpacity>
           </View>
