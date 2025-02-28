@@ -14,7 +14,7 @@ export default function SignUp() {
 
   return (
     <LinearGradient colors={["#1E1E1E", "#292929"]}  style={styles.container}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
 
 
       <View style={styles.signupBox}>

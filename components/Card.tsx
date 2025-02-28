@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Image, StyleSheet ,TouchableOpacity} from "react-native";
+import { View, Text, Image, StyleSheet ,TouchableOpacity,Pressable} from "react-native";
+import { router } from "expo-router";
 
 interface CardProps {
     title: string;
@@ -15,7 +16,9 @@ const Card = ({ title, image, content }:CardProps) => {
       <Text style={styles.content}>{content}</Text>
 
       <TouchableOpacity style={styles.button}>
+        <Pressable onPress={() => router.push("/DisplayArticle")} >
                 <Text style={styles.buttonText}>Read More</Text>
+        </Pressable>
     </TouchableOpacity>
 
     </View>

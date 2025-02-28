@@ -1,5 +1,5 @@
-import Article from "./app/Article"
-import DashBoard from "./app/DashBoard"
+import Article from "./app/(tabs)/ArticleCreate"
+import DashBoard from "./app/(tabs)/DashBoard"
 import Login from "./app/Login"
 import SignUp from "./app/SignUp"
 

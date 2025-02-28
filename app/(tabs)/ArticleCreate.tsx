@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 
 
-export default function Article() {
+export default function ArticleCreate() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
@@ -30,10 +30,11 @@ export default function Article() {
   return (
     <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
       <StatusBar style="light" />
+       <ScrollView style={styles.scrollView}>
 
 
       <View style={styles.articleBox}>
-        <Text style={styles.title}>Write Your Article</Text>
+        {/* <Text style={styles.title}>Write Your Article</Text> */}
 
 
         <View style={styles.inputContainer}>
@@ -84,8 +85,10 @@ export default function Article() {
           <Text style={styles.buttonText}>Delete Article</Text>
         </TouchableOpacity>
       </View>
+      
        
       </View>
+      </ScrollView>
     </LinearGradient>
   );
 }
@@ -168,6 +171,11 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  scrollView: {
+    backgroundColor: '#292929',
+    marginHorizontal: 20,
+    width: "100%",
   },
 });
 

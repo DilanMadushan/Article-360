@@ -2,14 +2,14 @@ import React from 'react'
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
-import Card from '../components/Card'
+import Card from '../../components/Card'
 
-const DashBoard = () => {
+const Articles = () => {
   
   return (
      <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
           <StatusBar style="dark" />
-          <Text style={styles.title}>DASHBOARD</Text>
+          {/* <Text style={styles.title}>DASHBOARD</Text> */}
           <ScrollView style={styles.scrollView}>
             
 
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DashBoard
+export default Articles
