@@ -23,7 +23,7 @@ function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="Dashboard"
         options={{
           headerTitle: "DASHBOARD",
           title: "DASHBOARD",

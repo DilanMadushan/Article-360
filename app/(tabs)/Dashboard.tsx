@@ -13,16 +13,26 @@ import {
 import Card from "../../components/Card";
 import ArticleModle from "../../model/ArticlModel";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { getArticleState } from "../../slice/ArticleSlice";
 
 const DashBoard = () => {
   const articles = useSelector((state) => state.article);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+          if (articles.length === 0) {
+            dispatch(getArticleState());
+          }
+        }, [dispatch,articles.length]);
 
   return (
     <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
       <StatusBar style="dark" />
       {/* <Text style={styles.title}>DASHBOARD</Text> */}
       <ScrollView style={styles.scrollView}>
-        {articles.slice(0, 2).map((item: ArticleModle, index) => (
+        {articles.slice(0, 3).map((item: ArticleModle, index) => (
           <Card
             key={index}
             title={item.title}
