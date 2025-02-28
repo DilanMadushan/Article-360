@@ -1,17 +1,35 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import ArticleModle from "../../model/ArticlModel";
 
+// Function to convert image URI to Base64
+const encodeImageFileAsURL = async (uri) => {
+  try {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  } catch (error) {
+    console.error("Error encoding image:", error);
+    return "";
+  }
+};
 
 export default function ArticleCreate() {
+  const [article, setArticle] = useState<ArticleModle[]>([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
 
-
+  // Pick Image from Library
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -20,80 +38,87 @@ export default function ArticleCreate() {
       quality: 1,
     });
 
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
   };
 
+  const addArticle = async () => {
+    try {
+      if (!image) {
+        console.error("No image selected!");
+        return;
+      }
+
+      const base64Image = await encodeImageFileAsURL(image);
+
+      setArticle([...article, new ArticleModle(title, base64Image, content)]);
+      setTitle("");
+      setContent("");
+      setImage(null);
+    } catch (error) {
+      console.error("Error adding article:", error);
+    }
+  };
+
+  {article.map((item, index) => (
+
+    console.log(item.title, item.image, item.content)
+    
+  ))}
 
   return (
+
     <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
       <StatusBar style="light" />
-       <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.articleBox}>
+          <View style={styles.inputContainer}>
+            <Ionicons name="document-text-outline" size={20} color="#888" />
+            <TextInput
+              style={styles.input}
+              placeholder="Article Title"
+              placeholderTextColor="#888"
+              value={title}
+              onChangeText={setTitle}
+            />
+          </View>
 
+          <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
+            {image ? (
+              <Image source={{ uri: image }} style={styles.image} />
+            ) : (
+              <Text style={styles.imagePickerText}>Pick an Image</Text>
+            )}
+          </TouchableOpacity>
 
-      <View style={styles.articleBox}>
-        {/* <Text style={styles.title}>Write Your Article</Text> */}
-
-
-        <View style={styles.inputContainer}>
-          <Ionicons name="document-text-outline" size={20} color="#888" />
           <TextInput
-            style={styles.input}
-            placeholder="Article Title"
+            style={styles.contentInput}
+            placeholder="Write your article here..."
             placeholderTextColor="#888"
-            value={title}
-            onChangeText={setTitle}
+            value={content}
+            onChangeText={setContent}
+            multiline
           />
+
+          <View style={{ width: "100%" }}>
+            <TouchableOpacity style={styles.button} onPress={addArticle}>
+              <Text style={styles.buttonText}>Save Article</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={addArticle}>
+              <Text style={styles.buttonText}>Update Article</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={addArticle}>
+              <Text style={styles.buttonText}>Delete Article</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
-
-        <TouchableOpacity style={styles.imagePicker} onPress={pickImage}>
-          {image ? (
-            <Image source={{ uri: image }} style={styles.image} />
-          ) : (
-            <Text style={styles.imagePickerText}>Pick an Image</Text>
-          )}
-        </TouchableOpacity>
-
-
-        <TextInput
-          style={styles.contentInput}
-          placeholder="Write your article here..."
-          placeholderTextColor="#888"
-          value={content}
-          onChangeText={setContent}
-          multiline
-        />
-
-
-
-
-        <View style={{ width: "100%"}}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Save Article</Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Update Article</Text>
-        </TouchableOpacity>
-
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Delete Article</Text>
-        </TouchableOpacity>
-      </View>
-      
-       
-      </View>
       </ScrollView>
     </LinearGradient>
   );
 }
 
-
+// Styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -110,12 +135,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowRadius: 10,
     alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#ffffff",
   },
   inputContainer: {
     flexDirection: "row",
@@ -154,7 +173,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     width: "100%",
-    height:250,
+    height: 250,
     textAlignVertical: "top",
     fontSize: 16,
     marginBottom: 15,
@@ -173,12 +192,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   scrollView: {
-    backgroundColor: '#292929',
+    backgroundColor: "#292929",
     marginHorizontal: 20,
     width: "100%",
   },
 });
-
-
-
-
