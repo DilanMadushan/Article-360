@@ -7,22 +7,24 @@ import ArticleModle from '../../model/ArticlModel'
 
 const DashBoard = () => {
 
-  const [article, setArticle] = useState<ArticleModle[]>([]);
-
-  useEffect(() => {
-    if (article.length === 0) {
-      setArticle([...article,
-        new ArticleModle(
-          "Impossible is Nothing",
-          "https://wbcboxing.com/wp-content/uploads/ali-artew.jpg",
-          `I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.’`
-        ),
-      ]);
-    }
-
-  }, [article.length]);
-
-  
+  const [article, setArticle] = useState<ArticleModle[]>(
+    [
+      new ArticleModle(
+    "Impossible is Nothing",
+    "https://wbcboxing.com/wp-content/uploads/ali-artew.jpg",
+    `I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.’`
+  ),
+  new ArticleModle(
+    "Be Water My Friend",
+    "https://images.squarespace-cdn.com/content/v1/6361dd69de5a8f306569332e/7d1101d8-5744-4870-ae9a-ce1a24b25c7e/bruce-lee-ai-generated.jpg",
+    `I fear not the man who has practiced 10,000 kicks once, but I fear the man who has practiced one kick 10,000 times.`
+  ),
+  new ArticleModle(
+    "Rejection",
+    "https://ew.com/thmb/jbZeqjk4U9RhyEq6Ti-fc6rUbLc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/john-rambo-ec49213d8d2147f98c48c3a8dcaa5945.jpg",
+    `I believe there's an inner power that makes winners or losers. And the winners are the ones who really listen to the truth of their hearts.`
+  )],
+);
   
   return (
      <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>

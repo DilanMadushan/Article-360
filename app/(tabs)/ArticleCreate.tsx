@@ -5,8 +5,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 import ArticleModle from "../../model/ArticlModel";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { saveArticleState } from "../../slice/ArticleSlice";
 
-// Function to convert image URI to Base64
+
 const encodeImageFileAsURL = async (uri) => {
   try {
     const response = await fetch(uri);
@@ -29,7 +32,11 @@ export default function ArticleCreate() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
 
-  // Pick Image from Library
+  const articles = useSelector((state) => state.article);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -52,7 +59,7 @@ export default function ArticleCreate() {
 
       const base64Image = await encodeImageFileAsURL(image);
 
-      setArticle([...article, new ArticleModle(title, base64Image, content)]);
+      dispatch(saveArticleState(new ArticleModle(title, base64Image, content)));
       setTitle("");
       setContent("");
       setImage(null);

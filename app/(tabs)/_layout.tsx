@@ -1,6 +1,8 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { Provider } from "react-redux";
+import { store } from "../../store/store";
 
 function TabLayout() {
   return (
