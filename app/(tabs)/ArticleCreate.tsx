@@ -7,7 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import ArticleModle from "../../model/ArticlModel";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { saveArticleState } from "../../slice/ArticleSlice";
+import { saveArticleState, updateArticleState } from "../../slice/ArticleSlice";
 
 
 const encodeImageFileAsURL = async (uri) => {
@@ -56,6 +56,14 @@ export default function ArticleCreate() {
         console.error("No image selected!");
         return;
       }
+      if(!title){
+        console.error("No title selected!");
+        return;
+      }
+      if(!content){
+        console.error("No content selected!");
+        return;
+      }
 
       const base64Image = await encodeImageFileAsURL(image);
 
@@ -68,11 +76,30 @@ export default function ArticleCreate() {
     }
   };
 
-  {article.map((item, index) => (
 
-    console.log(item.title, item.image, item.content)
-    
-  ))}
+  const updateArticle = async () => {
+    try {
+      if (!image) {
+        console.error("No image selected!");
+        return;
+      }
+      if(!title){
+        console.error("No title selected!");
+        return;
+      }
+      if(!content){
+        console.error("No content selected!");
+        return;
+      }
+
+      const base64Image = await encodeImageFileAsURL(image);
+
+      dispatch(updateArticleState(new ArticleModle(title, base64Image, content)));
+    }
+    catch (error) {
+      console.error("Error updating article:", error);
+    }
+  };
 
   return (
 
@@ -112,7 +139,7 @@ export default function ArticleCreate() {
             <TouchableOpacity style={styles.button} onPress={addArticle}>
               <Text style={styles.buttonText}>Save Article</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={addArticle}>
+            <TouchableOpacity style={styles.button} onPress={updateArticle}>
               <Text style={styles.buttonText}>Update Article</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={addArticle}>

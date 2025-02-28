@@ -32,6 +32,19 @@ export const getArticleState = createAsyncThunk(
         }
 })
 
+export const updateArticleState = createAsyncThunk(
+    'article/update',
+    async(article:ArticleModle)=>{
+            
+            try{
+                const response = await api.put(`article`,article);
+                return response.data;
+            }catch(e){
+                console.log(e);
+            }
+    }
+)
+
 
 
 const articleSlice = createSlice({
@@ -39,32 +52,43 @@ const articleSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-        builder.
-         addCase(saveArticleState.fulfilled,(state,action)=>{
-            state.push(action.payload)
+        builder
+        .addCase(saveArticleState.fulfilled, (state, action) => {
+            state.push(action.payload);
         })
-        .addCase(saveArticleState.rejected,(state,action)=>{
+        .addCase(saveArticleState.rejected, (state, action) => {
             console.log(action.payload);
-            
         })
-        .addCase(saveArticleState.pending,(state,action)=>{
+        .addCase(saveArticleState.pending, () => {
             console.log("pending");
-            
-        })  
-        builder.addCase(getArticleState.fulfilled,(state,action)=>{
-           action.payload.map((article:ArticleModle)=>{
-               state.push(article);
-           })
+        });
+        builder
+        .addCase(getArticleState.fulfilled, (state, action) => {
+            return [...state, ...action.payload]; 
         })
-        .addCase(getArticleState.rejected,(state,action)=>{
+        .addCase(getArticleState.rejected, (state, action) => {
             console.log(action.payload);
-            
-        }).addCase(getArticleState.pending,(state,action)=>{
-            console.log("pending");
-            
         })
-
+        .addCase(getArticleState.pending, () => {
+            console.log("pending");
+        });
+        builder
+        .addCase(updateArticleState.fulfilled, (state, action) => {
+           return state = state.map((article:ArticleModle) => {
+                if(article.title === action.payload.title){
+                    return action.payload;
+                }
+                return article;
+            })
+        })
+        .addCase(updateArticleState.rejected, (state, action) => {
+            console.log(action.payload);
+        })
+        .addCase(updateArticleState.pending, () => {
+            console.log("pending");
+        });
     }
 });
+
 
 export default articleSlice.reducer;

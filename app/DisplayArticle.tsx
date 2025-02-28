@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import ArticleModle from '../model/ArticlModel';
 
 const DisplayArticle = () => {
-  // Fetching articles from Redux store
   const articles: ArticleModle[] = useSelector((state: any) => state.read);
 
   return (
@@ -14,7 +13,7 @@ const DisplayArticle = () => {
       <StatusBar style="dark" />
       <ScrollView style={styles.scrollView}>
         {articles.map((item: ArticleModle, index: number) => {
-          // Conditionally render only the first article
+         
           if (articles.length === index + 1) {
             return (
               <View key={index} style={styles.articleContainer}>
@@ -24,7 +23,7 @@ const DisplayArticle = () => {
               </View>
             );
           }
-          return null; // Return null for other articles (you can modify this as needed)
+          return null; 
         })}
       </ScrollView>
     </LinearGradient>

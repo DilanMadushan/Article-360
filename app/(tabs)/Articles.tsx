@@ -23,7 +23,6 @@ const Articles = () => {
   return (
      <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
           <StatusBar style="dark" />
-          {/* <Text style={styles.title}>DASHBOARD</Text> */}
           <ScrollView style={styles.scrollView}>
 
             {articles.map((item:ArticleModle, index) => (
