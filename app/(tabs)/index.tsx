@@ -4,6 +4,10 @@ import { StatusBar } from "expo-status-bar";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image,ScrollView } from "react-native";
 import Card from '../../components/Card'
 import ArticleModle from '../../model/ArticlModel'
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { findArticle } from '../../slice/ReadSlice';
 
 const DashBoard = () => {
 
@@ -25,7 +29,7 @@ const DashBoard = () => {
     `I believe there's an inner power that makes winners or losers. And the winners are the ones who really listen to the truth of their hearts.`
   )],
 );
-  
+
   return (
      <LinearGradient colors={["#1E1E1E", "#292929"]} style={styles.container}>
           <StatusBar style="dark" />

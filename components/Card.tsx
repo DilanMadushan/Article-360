@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text, Image, StyleSheet ,TouchableOpacity,Pressable} from "react-native";
 import { router } from "expo-router";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
+import { findArticle } from "../slice/ReadSlice";
 
 interface CardProps {
     title: string;
@@ -9,6 +13,9 @@ interface CardProps {
 }
 
 const Card = ({ title, image, content }:CardProps) => {
+
+const dispatch = useDispatch<AppDispatch>();
+
   return (
     <View style={styles.card}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
@@ -16,7 +23,10 @@ const Card = ({ title, image, content }:CardProps) => {
       <Text style={styles.content}>{content}</Text>
 
       <TouchableOpacity style={styles.button}>
-        <Pressable onPress={() => router.push("/DisplayArticle")} >
+        <Pressable onPress={() => {
+          router.push("/DisplayArticle");
+          dispatch(findArticle(title));
+          }} >
                 <Text style={styles.buttonText}>Read More</Text>
         </Pressable>
     </TouchableOpacity>

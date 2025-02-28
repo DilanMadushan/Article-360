@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ArticleModle from "../model/ArticlModel";
 import axios from "axios";
 
-export const initialState :ArticleModle[]= [];
+const initialState: ArticleModle[] = []
 
 const api = axios.create({
     baseURL : "http://localhost:3000/"
